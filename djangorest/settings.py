@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v^hb*g(_spjzfsf*zuzvo(r76r-jq++=a8yau5nd5qn%gmd%kd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core',
     'employee',
     'car',
+    'new_user',
 ]
 
 MIDDLEWARE = [
@@ -75,13 +76,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangorest.wsgi.application'
 
+RENDERER = (
+    'rest_framework.renderers.JSONRenderer' ,)
+if DEBUG:
+    RENDERER += ('rest_framework.renderers.BrowsableAPIRender' , )
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ) ,
-    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAdminUser' ,
-                                    'rest_framework.permissions.IsAuthenticated') ,
+    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',) ,
     'DEFAULT_FILTER_BACKENDS' : (
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
@@ -89,7 +94,8 @@ REST_FRAMEWORK = {
     ) ,
     'DEFAULT_PAGINATION_CLASS' :
         'rest_framework.pagination.LimitOffsetPagination' ,
-        'PAGE_SIZE' : 2
+        'PAGE_SIZE' : 2 ,
+    'DEFAULT_RENDERER_CLASSES' : RENDERER
 
 }
 

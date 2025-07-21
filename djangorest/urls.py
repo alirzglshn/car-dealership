@@ -24,5 +24,6 @@ urlpatterns = [
     path('employee/' , include('employee.urls')),
     path('car/' , include('car.urls')),
     path('api-token-auth' , views.obtain_auth_token),
-    path('api-auth' , include('rest_framework.urls'))
+    path('api-auth' , include('rest_framework.urls')),
+    path('new_user/' , include('new_user.urls'))
 ]
