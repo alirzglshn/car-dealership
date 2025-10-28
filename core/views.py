@@ -1,23 +1,27 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view , permission_classes
 from rest_framework.response import responses, Response
 from rest_framework import status
 from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.permissions import AllowAny
+
 
 from .serializers import Calculator
 
 
 # Create your views here.
 
+@permission_classes([AllowAny])
 @api_view()
 def index(request):
     return Response({'message' : 'hello , world'})
 
 
+
 @api_view(['GET' , 'POST'])
 def hello(request):
     if request.method == "GET":
-        return Response({'message' : 'hellow world!'})
+        return Response({'message' : 'go to hell motherfucker!'})
     elif request.method == "POST":
         return Response({"message" : "Hello , {}".format(request.data['name'])})
 

@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v^hb*g(_spjzfsf*zuzvo(r76r-jq++=a8yau5nd5qn%gmd%kd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -79,14 +79,14 @@ WSGI_APPLICATION = 'djangorest.wsgi.application'
 RENDERER = (
     'rest_framework.renderers.JSONRenderer' ,)
 if DEBUG:
-    RENDERER += ('rest_framework.renderers.BrowsableAPIRender' , )
+    RENDERER += ('rest_framework.renderers.BrowsableAPIRenderer' , )
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ) ,
-    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticated',) ,
+    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.AllowAny',) ,
     'DEFAULT_FILTER_BACKENDS' : (
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',

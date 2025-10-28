@@ -9,7 +9,7 @@ class EmployeeSer(serializers.ModelSerializer):
         read_only_fields = ['created_at' , 'updated_at']
 
     def validate_name(self , value):
-        if value == "reza":
+        if value == "alireza":
             raise serializers.ValidationError("go to hell")
         else :
             return value

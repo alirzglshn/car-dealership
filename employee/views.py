@@ -49,6 +49,7 @@ def get_update_delete_employee(request , pk):
         employee.delete()
         return Response(status= status.HTTP_204_NO_CONTENT)
 
+
 @api_view(['GET'])
 def search_employee(request):
     employees = Employee.objects.filter(name=request.query_params['name'])
